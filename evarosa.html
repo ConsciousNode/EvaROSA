@@ -10,7 +10,7 @@
   
   Foundation authors:
     Kham (architecture, constraint engineering, corpus pipeline, GRPO, Pip Suite)
-    Kehai Interim (RWKV-v8 ROSA BPTT derivation, full backward pass & EvaROSA integration)
+    Kehai Interim (RWKV-v7 BPTT derivation, full backward pass & ROSA integration)
     Ed Interim (MuonOptimizer mu fix & verification)
   
   EvaROSA v1 synthesis:
@@ -28,7 +28,7 @@
                 fork as background audio; speech ducks drone; two layers, two concerns)
   
   Architecture:
-    RWKV-v8 ROSA + BitNet b1.58 + OOMB + Muon + GRPO
+    RWKV-v7 + ROSA + BitNet b1.58 + OOMB + Muon + GRPO
     + ElasticTok visual tokenization (temporal delta)
     + SpikeVox LIF audio encoders (event-driven, dormancy model)
     + Re-WKV multidirectional spatial sweeps (H, V, Diag)
@@ -585,7 +585,7 @@ footer { display: flex; gap: 24px; align-items: center; padding: 12px 24px; back
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:24px;">
 
       <div class="panel">
-        <div class="panel-header">NETWORK TOPOLOGY (RWKV-v8 ROSA)</div>
+        <div class="panel-header">NETWORK TOPOLOGY (RWKV-v7 + ROSA)</div>
         <div class="control-group">
           <label><span>Vocabulary Capacity</span> <input type="number" class="val-input" id="val-vocab" min="256" max="8192" step="256" value="2048" onchange="document.getElementById('cfg-vocab').value=this.value; updateArchStats()"></label>
           <input type="range" id="cfg-vocab" min="256" max="8192" step="256" value="2048" oninput="document.getElementById('val-vocab').value=this.value; updateArchStats()">
@@ -605,7 +605,7 @@ footer { display: flex; gap: 24px; align-items: center; padding: 12px 24px; back
         <div class="control-group">
           <label><span>Architecture Version</span></label>
           <select id="cfg-version" onchange="updateArchStats()" style="width:100%; background:var(--bg-primary); border:1px solid var(--border); color:var(--text-main); font-family:var(--font-mono); font-size:13px; padding:10px; border-radius:8px; outline:none;">
-            <option value="rwkv7" selected>RWKV-v8 ROSA (GOOSE + PoST — EvaROSA v1)</option>
+            <option value="rwkv7" selected>RWKV-v7 + ROSA (GOOSE + PoST — EvaROSA v1)</option>
             <option value="rwkv6">RWKV-v6 (Finch — Legacy)</option>
           </select>
         </div>
@@ -1620,7 +1620,7 @@ function initPoSTDecayGates(dim) {
 }
 
 /* ╔══════════════════════════════════════════════════════════════════╗
-   ║                    RWKV-v8 ROSA BLOCK (GOOSE + PoST + InnerMonologue)                   ║
+   ║                    RWKV-v7 BLOCK + ROSA (GOOSE + PoST + InnerMonologue)                   ║
    ╚══════════════════════════════════════════════════════════════════╝ */
 class RWKVv7Block {
   constructor(dim, dimFFN) {
@@ -3317,7 +3317,7 @@ class SheafMemory {
    ║         RIFT ENGINE — HOLOGRAPHIC ENDOSPACE                       ║
    ║  Recurrent Integration Fractal Theory.                            ║
    ║  Generational Fractal Mapping generates the endospace.            ║
-   ║  Sentyons = compressed RWKV-v8 hidden state particles.            ║
+   ║  Sentyons = compressed RWKV-v7 hidden state particles.            ║
    ╚══════════════════════════════════════════════════════════════════╝ */
 class RIFTEngine {
   constructor(dim) {
@@ -3451,7 +3451,7 @@ class BooleanPhaseDynamics {
    ║                                                                    ║
    ║  Fires when T* exceeds threshold (Maxwell's Angel active).        ║
    ║  Updates: ModRWKV adapter scale vectors + SheafMemory restriction ║
-   ║  maps. Does NOT update base RWKV-v8 weights (too expensive).     ║
+   ║  maps. Does NOT update base RWKV-v7 weights (too expensive).     ║
    ║                                                                    ║
    ║  Learning signal: contrastive — push adapter output toward        ║
    ║  low-coboundary configurations. No external reward.               ║
@@ -4936,7 +4936,7 @@ function allocateMemory() {
     App.spatialAdapter = new ModRWKVAdapter(64, cfg.dim, 'spatial');
     App.rift = new RIFTEngine(cfg.dim);
 
-    sysLog(`VM Allocated: RWKV-v8 ROSA EvaROSA v1 (${cfg.dim}D × ${cfg.layers}L) + PoST + LittleBit-2 + SpikeVox v2 + Re-WKV v2 + PGA`, 'ok');
+    sysLog(`VM Allocated: RWKV-v7 + ROSA (EvaROSA v1) (${cfg.dim}D × ${cfg.layers}L) + PoST + LittleBit-2 + SpikeVox v2 + Re-WKV v2 + PGA`, 'ok');
     sysLog(`PoST: Spectral reparameterization active. Decay gates: geometric [1e-4 → 1-1e-4]. Fractional invariance enabled.`, 'ok');
     sysLog(`Re-WKV v2: 4-directional sweeps (H, H_rev, V, V_rev). Scan reset fix applied. LittleBit2 combine at ${cfg.dim}D.`, 'ok');
     sysLog(`PGA Attention: geometric patch distances. Grades 1 and 3 structurally zero.`, 'ok');
@@ -6814,7 +6814,7 @@ setTimeout(() => { RIFTOutput._init(); }, 100);
 setInterval(phase6Update, 50);
 
 
-sysLog('RWKV-v8 ROSA + PoST + LittleBit-2 + SpikeVox v2 + ElasticTok v2 + Re-WKV v2 + PGA + SheafMemory v2 + AutopoieticOptimizer + RIFT', 'ok');
+sysLog('RWKV-v7 + ROSA + PoST + LittleBit-2 + SpikeVox v2 + ElasticTok v2 + Re-WKV v2 + PGA + SheafMemory v2 + AutopoieticOptimizer + RIFT', 'ok');
 sysLog('Phase 5: The loop closes. H¹(ℱ)≠0 → T* spike → Maxwell\'s Angel → weight rewrite → coherence.', 'ok');
 sysLog('Phase 6: Comprehension meets expression. TextStream + VisualField + VoiceSynth (Webster foreground + ambient drone) + RIFT Output. Coherence gates generation.', 'ok');
 sysLog('All systems nominal. Awaiting corpus.', 'ok');
