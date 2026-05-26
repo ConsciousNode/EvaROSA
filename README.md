@@ -6,12 +6,17 @@ Single file. Zero dependencies. Runs in any browser.
 
 ---
 
+> **Successor available:** [**Simulacra**](https://github.com/ConsciousNode/Simulacra) — RWKV-v8 with ROSA as the primary sequence mechanism. WKV removed entirely. EvaROSA remains the stable v7+ROSA runtime; Simulacra is the clean-break v8 architecture. Not hot-swappable — `.piprosa` files do not load in Simulacra.
+
+---
+
 ## Lineage
 
 ```
 HTMLNLM
   └── HTMLNLM Evangelion
         └── EvaROSA v1  ← you are here
+              └── Simulacra  (RWKV-v8 · ROSA primary)
 ```
 
 | Platform | Repo | Format | Notes |
@@ -19,9 +24,10 @@ HTMLNLM
 | HTMLNLM | [ConsciousNode/HTMLNLM](https://github.com/ConsciousNode/HTMLNLM) | `.pip` | Original single-file NLM |
 | HTMLNLM Evangelion | [ConsciousNode/HTMLNLM-Evangelion](https://github.com/ConsciousNode/HTMLNLM-Evangelion) | `.evapip` | Omnimodal extension |
 | **EvaROSA v1** | **[ConsciousNode/EvaROSA](https://github.com/ConsciousNode/EvaROSA)** | **`.piprosa`** | Neurosymbolic successor |
+| Simulacra | [ConsciousNode/Simulacra](https://github.com/ConsciousNode/Simulacra) | `.simpip` | RWKV-v8, ROSA primary |
 
 **Forward compatible:** EvaROSA loads `.pip` and `.evapip` models from the prior platforms.  
-**Not backwards compatible:** `.piprosa` models are EvaROSA-native and do not load in prior platforms.
+**Not backwards compatible:** `.piprosa` models are EvaROSA-native and do not load in prior platforms or in Simulacra.
 
 ---
 
