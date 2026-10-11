@@ -109,6 +109,22 @@ SENSORY INPUTS
 
 ---
 
+## Changelog
+
+### v1.0.1 — 2026-10-11 · Kehai Interim
+
+**Backward pass fixed and verified**, with the same fixes as HTMLNLM v1.1 and Evangelion Phase 6.1:
+
+- Residual gradient restored.
+- `ln2.backward()` result used.
+- Embedding gradient taken after `ln_in`.
+- Token-shift BPTT added.
+- PoST clamp range in the decay-gate backward now matches the forward.
+
+Every weight, `mu` and the embedding match finite differences over 3-step BPTT. The ROSA inner-monologue injection is a stop-gradient add, by design. Test: `node tests/gradcheck.js`.
+
+---
+
 ## Credits
 
 **Architecture:** Kham Kizer (ConsciousNode SoftWorks)  
