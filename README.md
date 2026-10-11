@@ -111,6 +111,8 @@ SENSORY INPUTS
 
 ## Changelog
 
+- Speed, Tier 0 (2026-10-11 · Kehai Interim): fused cache-friendly BitLinear backward; Muon rebuilt (Newton–Schulz on the smaller side with cache-friendly loops, same update to 1e-6, ~2x faster; output head on AdamW per the original Muon recipe); **AdamW is now the default**, because on CPU Muon costs O(dim³) per matrix per step. Measured on HTMLNLM, a default training step went from ~104 s to ~11 s on one CPU thread. Gradient check still exact.
+
 ### v1.0.1 — 2026-10-11 · Kehai Interim
 
 **Backward pass fixed and verified**, with the same fixes as HTMLNLM v1.1 and Evangelion Phase 6.1:
